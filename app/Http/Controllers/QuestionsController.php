@@ -26,7 +26,7 @@ class QuestionsController extends Controller
      */
     public function create()
     {
-        $question = new Question();
+        // $question = new Question();
         return view('questions.create', compact('question'));
     }
 
@@ -39,9 +39,7 @@ class QuestionsController extends Controller
     public function store(AskQuestionRequest $request)
     {
         $request->user()->questions()->create($request->all());
-        // return redirect('/questions');
-        return redirect()->route('questions.index')
-                        ->with('success',"Your question has been created!");
+        return redirect()->route('questions.index')->with('success',"Your question has been created!");
     }
 
     /**
@@ -52,7 +50,7 @@ class QuestionsController extends Controller
      */
     public function show(Question $question)
     {
-        //
+        return view('questions.view', compact('question'));
     }
 
     /**
@@ -63,7 +61,7 @@ class QuestionsController extends Controller
      */
     public function edit(Question $question)
     {
-        //
+            return view('questions.edit', compact('question'));
     }
 
     /**
@@ -75,7 +73,8 @@ class QuestionsController extends Controller
      */
     public function update(Request $request, Question $question)
     {
-        //
+        $question->update($request->only('title','body'));
+        return redirect('/questions')->with('success','Your question has been updated');
     }
 
     /**
