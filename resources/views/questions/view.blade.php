@@ -10,11 +10,12 @@
                         <div class="ml-auto">
                             <a href="{{ route('questions.index') }}" class="btn btn-outline-secondary">Back to Question</a>
                         </div>
-                    </div>                 
+                    </div>                 clearstatcache
                     
+
                 </div>
                 <div class="card-body">
-                    <p>{{$question->body}}</p>
+                    <p>{ !! $question->body_html !! }</p>
                 </div>
             </div>
         </div>
