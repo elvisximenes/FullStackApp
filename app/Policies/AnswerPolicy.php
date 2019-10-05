@@ -10,7 +10,11 @@ class AnswerPolicy
 {
     use HandlesAuthorization;
 
-    
+    public function accept(User $user, Answer $answer)
+    {
+        return $user->id === $answer->question->user_id;
+    }
+
     public function update(User $user, Answer $answer)
     {
         return $user->id === $answer->user_id;

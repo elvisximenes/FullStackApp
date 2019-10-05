@@ -16,7 +16,13 @@ class Answer extends Model
     {
         return $this->belongsTo(User::class);
     }
-
+    public function getIsBestAttribute()
+    {
+        return $this->isBest();
+    }
+    public function isBest(){
+        return $this->id === $this->question->best_answer_id;
+    }
     public function getBodyHtmlAttribute()
     {
         return \Parsedown::instace()->text($this->body);

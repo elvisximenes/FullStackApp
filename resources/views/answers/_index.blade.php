@@ -11,8 +11,27 @@
                                 <a title="this answer is useful" class="vote-up"><i class="fas fa-caret-up fa-2x"></i></a>
                                 <span class='votes-count'>123</span>
                                 <a title="this quesanswertion is useful" class="vote-down off"><i class="fas fa-caret-down fa-2x"></i></a>
-                                <a title="Mark this as best answer" class=" {{$answer->status}} mt-3"><i class="fas fa-check fa-lg"></i></a>
+                            @can('accept', $answer)
+                                <a title="Mark this as best answer" 
+                                    class=" {{$answer->status}} mt-3"
+                                    onclick="event.preventDefault(); document.getElementById('accept-answer-{{ $answer->id }}').submit();"
+                                    >
+                                    
+                                    <i class="fas fa-check fa-lg"></i>
+                                </a>
+                                <form style="display:none;" id="accept-answer-{{ $answer->id }}" action="{{ route('answers.accept', $answer->id) }}" method="POST">
+                                        @csrf
+                                </form>
+                            @else
+                                @if($answer->is_best)
+                                <a title="The owner have accepted this as best answer" 
+                                    class=" {{$answer->status}} mt-3">
+                                    <i class="fas fa-check fa-lg"></i>
+                                </a>
+                                @endif
+                            @endcan
                                 <span class='favorite-count'>1234</span>
+
                             </div>
                             <div class="media-body">
                                 {{ $answer->body }}
