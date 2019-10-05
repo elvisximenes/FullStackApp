@@ -11,7 +11,7 @@
                                 <a title="this answer is useful" class="vote-up"><i class="fas fa-caret-up fa-2x"></i></a>
                                 <span class='votes-count'>123</span>
                                 <a title="this quesanswertion is useful" class="vote-down off"><i class="fas fa-caret-down fa-2x"></i></a>
-                                <a title="Mark this as best answer" class="vote-accepted mt-3"><i class="fas fa-check fa-lg"></i></a>
+                                <a title="Mark this as best answer" class=" {{$answer->status}} mt-3"><i class="fas fa-check fa-lg"></i></a>
                                 <span class='favorite-count'>1234</span>
                             </div>
                             <div class="media-body">
@@ -26,7 +26,7 @@
                                                     <form class="form-delete" method="post" action="{{ route('questions.answers.destroy',[$question->id,$answer->id]) }}">
                                                         @method('DELETE')
                                                         @csrf
-                                                        <button class="btn btn-sm btn-outline-danger" type="submit" onclick="return condfirm('Are you sure?')">Delete</button>
+                                                        <button class="btn btn-sm btn-outline-danger" type="submit" onclick="return confirm('Are you sure?')">Delete</button>
                                                     </form>
                                                 @endcan
                                             </div>
