@@ -19,14 +19,25 @@
                             <a title="this question is useful" class="vote-up">
                                 <i class="fas fa-caret-up fa-3x"></i>
                             </a>
-                            <span class='votes-count'>123</span>
-                            <a title="this question is useful" class="vote-down off">
+                            <span class='votes-count'>vote-123</span>
+                            <a title="this question is useful" 
+                                class="vote-down off">
                                 <i class="fas fa-caret-down fa-3x"></i>
                             </a>
-                            <a title="Click to mark as favorite question (Click again to undo)" class="favorite favorited mt-2">
+                            <a title="Click to mark as favorite question (Click again to undo)" 
+                                class="favorite mt-2 {{ Auth::guest() ? 'off' : ($question->is_favorited ? 'favorited' : '' )}}"
+                                onclick="event.preventDefault(); document.getElementById('favorite-question-{{ $question->id }}').submit();"
+                                >
                                 <i class="fas fa-star fa-2x"></i>
+                                <span class="favorites-count"> {{ $question->favorite_count}}</span>
                             </a>
-                            <span class='favorite-count'>1234</span>
+                            <form style="display:none;" id="favorite-question-{{ $question->id }}" action="/questions/{{ $question->id}}/favorites" method="POST">
+                                        @csrf
+                                        @if($question->is_favorited)
+                                            @method('DELETE')
+                                        @endif
+                                </form>
+                            
                             </div>
                             <div class="media-body">
                                 <p>{{ $question->body }}</p>

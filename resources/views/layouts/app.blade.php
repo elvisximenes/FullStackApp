@@ -23,9 +23,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/v4-shims.css">
 </head>
 <body>
-    <div id="app">
-       
-
+    <div id="app">   
         <main class="py-4">
             @yield('content')
         </main>
