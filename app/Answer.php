@@ -27,7 +27,7 @@ class Answer extends Model
     }
     public function getBodyHtmlAttribute()
     {
-        return \Parsedown::instace()->text($this->body);
+        return clean (\Parsedown::instace()->text($this->body));
     }
 
     public static function boot()
