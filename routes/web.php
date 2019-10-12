@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'QuestionsController@index');
 Route::resource('questions','QuestionsController')->except('show');
 Route::get('/questions/{slug}', 'QuestionsController@show')->name('questions.show');
 Route::resource('questions.answers','AnswersController')->except('index','create','show');
