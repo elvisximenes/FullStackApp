@@ -28,29 +28,8 @@
                             <form style="display:none;" id="down-vote-answer-{{ $answer->id }}" action="/answers/{{ $answer->id}}/vote" method="POST">
                                         @csrf
                                         <input type='hidden' name="vote" value="-1">
-                                </form>
-
-
-                            @can('accept', $answer)
-                                <a title="Mark this as best answer" 
-                                    class=" {{$answer->status}} mt-3"
-                                    onclick="event.preventDefault(); document.getElementById('accept-answer-{{ $answer->id }}').submit();"
-                                    >
-                                    
-                                    <i class="fas fa-check fa-lg"></i>
-                                </a>
-                                <form style="display:none;" id="accept-answer-{{ $answer->id }}" action="{{ route('answers.accept', $answer->id) }}" method="POST">
-                                        @csrf
-                                </form>
-                            @else
-                                @if($answer->is_best)
-                                <a title="The owner have accepted this as best answer" 
-                                    class=" {{$answer->status}} mt-3">
-                                    <i class="fas fa-check fa-lg"></i>
-                                </a>
-                                @endif
-                            @endcan
-                                <span class='favorite-count'>1234</span>
+                            </form>
+                            <span class='favorite-count'>1234</span>
 
                             </div>
                             <div class="media-body">
@@ -71,15 +50,15 @@
                                             </div>
                                         </div>
                                         <div class="col-4"></div>
-                                        <div class='col-4'>
-                                            <span class="text-muted">Answered {{ $answer->created_date}}</span>
-                                            <div class="media mt-3">
-                                                <a href="" class="pr-2"><img src="{{ $answer->user->avatar}}"></a>
-                                                <div class="media-body mt-1">
-                                                    <a href="{{ $answer->user->url }}">{{ $answer->user->name }}</a>
-                                                </div>
-                                            </div>
+                                        
+                                        <div class="col-4">
+                                            @include('shared._author',[
+                                                'model' => $answer,
+                                                'label' => 'Answered'
+                                            ])
                                         </div>
+
+                                        
                                 </div>
                                 
                             </div>

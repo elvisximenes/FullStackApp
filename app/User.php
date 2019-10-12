@@ -62,8 +62,8 @@ class User extends Authenticatable
     public function getAvatarAttribute()
     {
         $email = $this->email;
-        $default = "https://www.somewhere.com/homestar.jpg";
-        $size = 32;
+        $default = "https://www.gravatar.com/avatar/";
+        $size = 10;
         return $grav_url = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $size;
     }
     
