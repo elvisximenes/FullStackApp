@@ -42,7 +42,7 @@
             'model' => $model
         ])
     @elseif($model instanceof App\Answer)
-        @include ('shared._accept', [
+        @include ('shared._favorite', [
             'model' => $model
         ])
     @endif
