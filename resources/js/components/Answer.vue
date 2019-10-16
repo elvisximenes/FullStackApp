@@ -34,11 +34,25 @@
                     console.log(err.data.message);
                     console.log("Something went wrong");
                 });
+            },
+            destroy () {
+                if(confirm('are yo sure?')){
+                    axios.delete(this.endpoint)
+                    .then(res => {
+                        $(this.$el).fadeOut(500, () => {
+                            alert(err.response.data.message)
+                        })
+                    })
+                    .catch();
+                }
             }
         },
         computed: {
             isInvalid () {
                 return this.body.length < 10;
+            },
+            endpoint () {
+                return `/questions/${this.questionId}/answers/${this.id}`;
             }
         }
     }

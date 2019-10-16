@@ -4504,11 +4504,25 @@ __webpack_require__.r(__webpack_exports__);
         console.log(err.data.message);
         console.log("Something went wrong");
       });
+    },
+    destroy: function destroy() {
+      var _this2 = this;
+
+      if (confirm('are yo sure?')) {
+        axios["delete"](this.endpoint).then(function (res) {
+          $(_this2.$el).fadeOut(500, function () {
+            alert(err.response.data.message);
+          });
+        })["catch"]();
+      }
     }
   },
   computed: {
     isInvalid: function isInvalid() {
       return this.body.length < 10;
+    },
+    endpoint: function endpoint() {
+      return "/questions/".concat(this.questionId, "/answers/").concat(this.id);
     }
   }
 });
