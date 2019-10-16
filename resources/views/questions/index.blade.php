@@ -12,7 +12,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="card-body">
                     @include('layouts._messages')
                     @forelse ($questions as $question)
@@ -30,3 +29,4 @@
         </div>
     </div>
 </div>
+@endsection

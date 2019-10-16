@@ -27,6 +27,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    protected $appends = ['url','avatar'];
 
     /**
      * The attributes that should be cast to native types.
@@ -63,7 +64,7 @@ class User extends Authenticatable
     {
         $email = $this->email;
         $default = "https://www.gravatar.com/avatar/";
-        $size = 10;
+        $size = 5;
         return $grav_url = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $size;
     }
     
