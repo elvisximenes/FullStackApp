@@ -9,7 +9,7 @@ class Answer extends Model
     use VotableTrait;
 
     protected $fillable = ['body','user_id'];
-    protected $appends = ['created_date'];
+    protected $appends = ['created_date','body_html'];
     
     public function question()
     {
@@ -27,10 +27,16 @@ class Answer extends Model
     public function isBest(){
         return $this->id === $this->question->best_answer_id;
     }
+    
     public function getBodyHtmlAttribute()
     {
-        return clean (\Parsedown::instace()->text($this->body));
+        return clean($this->bodyHtml());
     }
+
+    private function bodyHtml()
+   {
+        return \Parsedown::instance()->text($this->body);
+   }
 
     public static function boot()
     {
