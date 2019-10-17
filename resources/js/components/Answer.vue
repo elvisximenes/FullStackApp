@@ -28,23 +28,44 @@
                     console.log(res);
                     this.editing = false;
                     this.bodyHtml = res.data.body_html;
-                    alert(res.data.message);
+                    this.$toast.success(res.data.message, "success", {timeout:3000});
                 })
                 .catch( err => {
-                    console.log(err.data.message);
-                    console.log("Something went wrong");
+                    this.$toast.error(err.data.message, "Error", {timeout:3000});
                 });
             },
             destroy () {
-                if(confirm('are yo sure?')){
-                    axios.delete(this.endpoint)
-                    .then(res => {
-                        $(this.$el).fadeOut(500, () => {
-                            alert(err.response.data.message)
+                this.$toast.question('Are you sure about that?','Confirm', {
+                timeout: 20000,
+                close: false,
+                overlay: true,
+                displayMode: 'once',
+                id: 'question',
+                zindex: 999,
+                title: 'Hey',
+                position: 'center',
+                buttons: [
+                    ['<button><b>YES</b></button>', (instance, toast) => {
+                        axios.delete(this.endpoint)
+                        .then(res => {
+                            $(this.$el).fadeOut(500, () => {
+                                this.$toast.success(res.data.message, "success", {timeout:3000});
+                            });
                         })
-                    })
-                    .catch();
-                }
+                            
+                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+            
+                    }, true],
+                    ['<button>NO</button>', function (instance, toast) {
+            
+                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+            
+                    }],
+                ],
+                
+            });
+
+                
             }
         },
         computed: {
