@@ -10,7 +10,7 @@ class Question extends Model
     use VotableTrait;
     
     protected $fillable = ['title','body'];
-    protected $appends = ['created_date'];
+    protected $appends = ['created_date','is_favorited','favorites_count'];
 
     public function user()
     {
@@ -37,7 +37,7 @@ class Question extends Model
         return $this->isFavorited();
     }
 
-    public function getFavoriteCountAttribute()
+    public function getFavoritesCountAttribute()
     {
         return $this->favorites->count();
     }
